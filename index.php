@@ -1,6 +1,6 @@
 <!------ IMPORTO LA LOGICA ------>
 <?php
-include './function.php';
+include __DIR__ . '/partials/function.php';
 ?>
 
 <!------ INIZIO HTML ------>
@@ -40,12 +40,13 @@ include './function.php';
         form {
             background-color: white;
             color: black;
-            padding: 25px;
+            padding: 25px 35px;
             border-radius: 10px;
         }
 
-        input {
-            width: 50px;
+        .inputText {
+            width: 60px;
+            height: 25px;
             outline: none;
         }
 
@@ -83,6 +84,18 @@ include './function.php';
             border-radius: 10px;
             font-size: 1.5em;
         }
+
+        .avviso {
+            background-color: lightcoral;
+            color: darkred;
+            padding: 10px;
+            border: 2px solid red;
+            border-radius: 10px;
+        }
+
+        .avviso h4 {
+            margin: 0px;
+        }
     </style>
 </head>
 
@@ -94,11 +107,38 @@ include './function.php';
 
         <!-- FORM -->
         <form action="" method="GET" class="flex-column-center">
+
             <!-- input lunghezza password -->
-            <div>
+            <div class="mb-3">
                 <label for="pass_len">Lunghezza password: </label>
-                <input type="number" min="6" max="30" name="pass_len" id="pass_len">
+                <input type="number" min="6" max="30" name="pass_len" id="pass_len" class="inputText">
             </div>
+
+            <!-- caratteri ripetuti -->
+            <h6 class="mb-1">Opzioni minime:</h6>
+            <div>
+                <div>
+                    <input type="checkbox" name="maiuscole" checked>
+                    <span>Maiuscole</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="minuscole">
+                    <span>Minuscole</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="numeri">
+                    <span>Numeri</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="speciali">
+                    <span>Speciali</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="ripetuti">
+                    <span>Evita caratteri ripetuti</span>
+                </div>
+            </div>
+
             <!-- button -->
             <div>
                 <button class="invio" type="submit">Genera</button>
@@ -109,11 +149,27 @@ include './function.php';
         </form>
 
         <!-- risultato -->
-        <?php if (isset($max_len)) { ?>
-            <div class="risultato mt-5">
-                <span>Password: </span>
-                <?php echo passwordGenerator($max_len); ?>
-            </div>
+        <?php if (isset($max_len)) {
+
+            if (check_checkbox() == true) {
+
+                if (strlen(passwordGenerator($max_len)) != '0') { ?>
+                    <div class="risultato mt-5">
+                        <span>Password: </span>
+                        <?php echo passwordGenerator($max_len); ?>
+                    </div>
+                <?php } else { ?>
+                    <div class="avviso mt-5">
+                        <h4>Inserisci una lunghezza!</h4>
+                    </div>
+                <?php } ?>
+
+            <?php } else { ?>
+                <div class="avviso mt-5">
+                    <h4>Seleziona almeno una casella!</h4>
+                </div>
+            <?php } ?>
+
         <?php } ?>
     </div>
 </body>
