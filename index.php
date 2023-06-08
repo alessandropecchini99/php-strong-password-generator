@@ -1,20 +1,7 @@
-<!----- SEZIONE LOGICA ----->
+<!------ IMPORTO LA LOGICA ------>
 <?php
-function passwordGenerator($length)
-{
-    $caratteri = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $password = '';
-    for ($i = 0; $i < $length; $i++) {
-        $password .= $caratteri[random_int(0, strlen($caratteri) - 1)];
-    }
-    return $password;
-}
-
-if (isset($_GET['pass_len'])) {
-    $max_len = $_GET['pass_len'];
-}
+include './function.php';
 ?>
-
 
 <!------ INIZIO HTML ------>
 <!doctype html>
@@ -37,11 +24,21 @@ if (isset($_GET['pass_len'])) {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         body {
             height: 100vh;
+        }
+
+        p {
+            color: grey;
+        }
+
+        form {
+            background-color: white;
+            color: black;
+            padding: 25px;
+            border-radius: 10px;
         }
 
         input {
@@ -49,47 +46,72 @@ if (isset($_GET['pass_len'])) {
             outline: none;
         }
 
-        button {
+        button,
+        a {
             background-color: lightgrey;
+            color: black;
+            text-decoration: none;
             border: 0px;
             border-radius: 10px;
             margin-top: 2em;
-            padding: 5px;
             transition: 0.2s ease;
         }
 
-        button:hover {
+        .invio {
+            padding: 5px;
+        }
+
+        a {
+            padding: 7.5px;
+        }
+
+        button:hover,
+        a:hover {
             background-color: grey;
             color: white;
             transition: 0.2s ease;
         }
 
-        a {
-            text-decoration: none;
+        .risultato {
+            background-color: white;
             color: black;
+            width: fit-content;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.5em;
         }
     </style>
 </head>
 
 <body class="bg-dark text-white flex-column-center">
-    <div class="container flex-column-center">
-        <h1 class="pb-3">Strong Password Generator</h1>
+    <div class="container flex-column-center mt-5">
+        <!-- titolo -->
+        <h1>Strong Password Generator</h1>
+        <p class="pb-3">Da minimo 6 caratteri e massimo 30</p>
+
+        <!-- FORM -->
         <form action="" method="GET" class="flex-column-center">
+            <!-- input lunghezza password -->
             <div>
                 <label for="pass_len">Lunghezza password: </label>
-                <input type="number" name="pass_len" id="pass_len">
+                <input type="number" min="6" max="30" name="pass_len" id="pass_len">
             </div>
+            <!-- button -->
             <div>
-                <button type="submit">Genera</button>
-                <button type="reset">
+                <button class="invio" type="submit">Genera</button>
+                <button>
                     <a href="http://localhost:8888/-php-proj/php-strong-password-generator">Reset</a>
                 </button>
             </div>
         </form>
 
-        <?php if (isset($max_len)) {
-            echo passwordGenerator($max_len);
-        } ?>
+        <!-- risultato -->
+        <?php if (isset($max_len)) { ?>
+            <div class="risultato mt-5">
+                <span>Password: </span>
+                <?php echo passwordGenerator($max_len); ?>
+            </div>
+        <?php } ?>
     </div>
 </body>
 
