@@ -66,7 +66,7 @@ include __DIR__ . '/partials/function.php';
         }
 
         a {
-            padding: 7.5px;
+            padding: 8.5px;
         }
 
         button:hover,
@@ -150,9 +150,7 @@ include __DIR__ . '/partials/function.php';
 
         <!-- risultato -->
         <?php if (isset($max_len)) {
-
             if (check_checkbox() == true) {
-
                 if (strlen(passwordGenerator($max_len)) != '0') { ?>
                     <div class="risultato mt-5">
                         <span>Password: </span>
@@ -163,13 +161,11 @@ include __DIR__ . '/partials/function.php';
                         <h4>Inserisci una lunghezza!</h4>
                     </div>
                 <?php } ?>
-
             <?php } else { ?>
                 <div class="avviso mt-5">
                     <h4>Seleziona almeno una casella!</h4>
                 </div>
             <?php } ?>
-
         <?php } ?>
     </div>
 </body>
