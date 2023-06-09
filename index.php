@@ -103,7 +103,7 @@ include __DIR__ . '/partials/function.php';
     <div class="container flex-column-center mt-5">
         <!-- titolo -->
         <h1>Strong Password Generator</h1>
-        <p class="pb-3">Da minimo 6 caratteri e massimo 30</p>
+        <p class="pb-3">Da minimo 6 caratteri e massimo 26</p>
 
         <!-- FORM -->
         <form action="" method="GET" class="flex-column-center">
@@ -111,14 +111,14 @@ include __DIR__ . '/partials/function.php';
             <!-- input lunghezza password -->
             <div class="mb-3">
                 <label for="pass_len">Lunghezza password: </label>
-                <input type="number" min="6" max="30" name="pass_len" id="pass_len" class="inputText">
+                <input type="number" min="6" max="26" name="pass_len" id="pass_len" class="inputText">
             </div>
 
             <!-- caratteri ripetuti -->
             <h6 class="mb-1">Opzioni minime:</h6>
             <div>
                 <div>
-                    <input type="checkbox" name="maiuscole" checked>
+                    <input type="checkbox" name="maiuscole">
                     <span>Maiuscole</span>
                 </div>
                 <div>
